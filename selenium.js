@@ -1,4 +1,4 @@
-const { Builder, By } = require("selenium-webdriver");
+const { Builder, By, Key, until } = require("selenium-webdriver");
 
 const assert = require("assert");
 
@@ -24,6 +24,24 @@ describe("Email site tests", () => {
 
     let title = await driver.getTitle();
     assert.equal("Contact Us", title);
+
+    await driver.quit();
+  });
+
+  it("Test Email input and Email response", async () => {
+    let driver = await new Builder().forBrowser("chrome").build();
+
+    await driver.get("http://localhost:3000/contact");
+
+    let textbox = await driver.findElement(By.id("formInput"));
+    let btn = await driver.findElement(By.id("formSubmit"));
+
+    await textbox.sendKeys("Chrishaun Jones");
+    await btn.click();
+
+    let message = await driver.findElement(By.id("formMessage"));
+    let value = await message.getText();
+    assert.equal("More info coming to Chrishaun Jones", value);
 
     await driver.quit();
   });

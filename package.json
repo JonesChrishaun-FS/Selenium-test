@@ -4,7 +4,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "mocha selenium.js --no-timeouts"
+    "test": "mocha selenium.js --no-timeouts --parallel"
   },
   "dependencies": {
     "next": "latest",
